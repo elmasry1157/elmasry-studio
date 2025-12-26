@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="google-site-verification" content="google-site-verification: google819f781472a42474.html" />
+
+    <title>Elmasry Studio | الفخامة والتقنية</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Elmasry <span>Studio</span></div>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="ابحث عن منتج..." onkeyup="filterProducts()">
+        </div>
+
+        <nav id="nav-menu">
+            <ul>
+                <li><a onclick="showPage('home')">الرئيسية</a></li>
+                <li><a onclick="showPage('products-page')">المنتجات</a></li>
+                <li><a onclick="showPage('contact-page')">تواصل معنا</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-left">
+            <button class="auth-btn" onclick="toggleModal()">إنشاء حساب</button>
+            <div class="cart-btn" onclick="toggleCart()">
+                <span id="cart-count">0</span>
+                🛒
+            </div>
+        </div>
+    </header>
+
+    <div id="side-cart" class="side-cart">
+        <div class="cart-header">
+            <h3>سلة المشتريات</h3>
+            <button class="close-btn" onclick="toggleCart()">×</button>
+        </div>
+       <div id="cart-content">
+            </div>
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>الإجمالي:</span>
+                <span><span id="total-price">0</span> ج.م</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()">تأكيد الطلب والدفع 🔒</button>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-content payment-box">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+
+            <div id="payment-step-1">
+                <h3>الدفع الإلكتروني الآمن</h3>
+                <div class="payment-summary-mini">المبلغ: <span id="pay-amount">0</span> ج.م</div>
+
+                <div class="card-input-area">
+                    <label>رقم البطاقة</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" maxlength="16">
+                    <div class="input-row">
+                        <div class="col">
+                            <label>التاريخ</label>
+                            <input type="text" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="col">
+                            <label>CVV</label>
+                            <input type="password" placeholder="***" maxlength="3">
+                        </div>
+                    </div>
+                </div>
+                <button class="buy-btn full-width" onclick="processPayment()">اتمام الدفع الآن</button>
+            </div>
+
+            <div id="payment-success" style="display:none;">
+                <div class="success-icon">✔️</div>
+                <h3>تمت العملية بنجاح!</h3>
+                <p>تم استلام طلبك، وسنتواصل معك للشحن.</p>
+                <button class="auth-btn" onclick="location.reload()">العودة للمتجر</button>
+            </div>
+        </div>
+    </div>
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleModal()">&times;</span>
+            <h3>تسجيل دخول</h3>
+            <input type="email" placeholder="البريد الإلكتروني">
+            <input type="password" placeholder="كلمة المرور">
+            <button class="buy-btn full-width" onclick="toggleModal()">دخول</button>
+        </div>
+    </div>
+
+    <main>
+        <div id="home" class="page active-page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Elmasry Studio</h1>
+                    <p>احترافية في الأداء.. فخامة في التصميم</p>
+                    <button class="buy-btn" onclick="showPage('products-page')">ابدأ التسوق</button>
+                </div>
+            </section>
+
+            <section class="featured">
+                <h2 class="section-title">وصل حديثاً</h2>
+                <div class="grid">
+                    <div class="card" data-name="سماعة المحترفين">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format" alt="Headphone">
+                        <h3>سماعة المحترفين G1</h3>
+                        <p class="price">1,500 ج.م</p>
+                        <div id="area-p1">
+                            <button class="cart-add-btn" onclick="addToCart('p1', 'سماعة G1', 1500)">إضافة للعربة</button>
+                        </div>
+                    </div>
+
+                    <div class="card" data-name="زر تشغيل الكمبيوتر الخارجي">
+    <div class="badge">الأكثر طلباً</div>
+
+    <div class="product-gallery">
+        <img src="1.avif" id="main-img-pc" alt="Desktop Switch">
+
+        <div class="thumb-row">
+            <img src="1.avif" onclick="changeThumb('pc', '1.avif')" alt="صورة 1">
+            <img src="8.avif" onclick="changeThumb('pc', '8.avif')" alt="صورة 2">
+            <img src="6.avif" onclick="changeThumb('pc', '6.avif')" alt="صورة 3">
+            <img src="3.avif" onclick="changeThumb('pc', '3.avif')" alt="صورة 4">
+        </div>
+    </div>
+
+    <h3>زر تشغيل الكمبيوتر Desktop Switch</h3>
+    <p class="desc">زر ميكانيكي خارجي لتشغيل الكمبيوتر مع إضاءة RGB وكابل متين طوله 2 متر.</p>
+    <p class="price">100 ج.م</p>
+
+    <div id="area-pc">
+        <button class="cart-add-btn" onclick="addToCart('pc', 'زر تشغيل الكمبيوتر', 100)">إضافة للعربة</button>
+    </div>
+</div>
+                    <div class="card" data-name="كاميرا احترافية">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format" alt="Camera">
+                        <h3>كاميرا Canon EOS</h3>
+                        <p class="price">25,000 ج.م</p>
+                        <div id="area-p2">
+                            <button class="cart-add-btn" onclick="addToCart('p2', 'Canon EOS', 25000)">إضافة للعربة</button>
+                        </div>
+                    </div>
+                    <div class="card" data-name="مايكروفون">
+                        <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500&auto=format" alt="Mic">
+                        <h3>مايكروفون Podcast</h3>
+                        <p class="price">3,200 ج.م</p>
+                        <div id="area-p3">
+                            <button class="cart-add-btn" onclick="addToCart('p3', 'Mic Podcast', 3200)">إضافة للعربة</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="contact-page" class="page">
+            <section class="contact-box">
+                <h2>تواصل معنا</h2>
+                <p>يسعدنا خدمتك في أي وقت</p>
+                <div class="contact-links">
+                    <p>📞 <a href="tel:+201143258559">01143258559</a></p>
+                    <p>📧 <a href="mailto:mo.elmasry2011@gmail.com">mo.elmasry2011@gmail.com</a></p>
+                </div>
+                <a href="https://wa.me/201143258559" class="wa-link">واتساب مباشر 💬</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Elmasry Studio. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        let cart = {};
+        let finalTotal = 0;
+
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.getElementById(id).classList.add('active-page');
+            window.scrollTo(0,0);
+        }
+
+        function toggleCart() { document.getElementById('side-cart').classList.toggle('open'); }
+
+        function toggleModal() {
+            let m = document.getElementById('auth-modal');
+            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function filterProducts() {
+            let input = document.getElementById('search-input').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(input) ? "block" : "none";
+            });
+        }
+
+        function addToCart(id, name, price) {
+            if (!cart[id]) {
+                cart[id] = { name, price, qty: 1 };
+                document.getElementById(`area-${id}`).innerHTML = `
+                    <div class="qty-control">
+                        <button onclick="updateQty('${id}', -1, '${name}', ${price})">-</button>
+                        <span>1</span>
+                        <button onclick="updateQty('${id}', 1, '${name}', ${price})">+</button>
+                    </div>`;
+            }
+            render();
+        }
+
+        function updateQty(id, delta, name, price) {
+            cart[id].qty += delta;
+            if (cart[id].qty <= 0) {
+                delete cart[id];
+                document.getElementById(`area-${id}`).innerHTML = `<button class="cart-add-btn" onclick="addToCart('${id}', '${name}', ${price})">إضافة للعربة</button>`;
+            } else {
+                document.querySelector(`#area-${id} span`).innerText = cart[id].qty;
+            }
+            render();
+        }
+
+        function render() {
+            let list = document.getElementById('cart-content');
+            let total = 0, count = 0;
+            list.innerHTML = "";
+            for (let id in cart) {
+                total += cart[id].price * cart[id].qty;
+                count += cart[id].qty;
+                list.innerHTML += `
+                <div class="cart-item">
+                    <div><b>${cart[id].name}</b><br><small>${cart[id].qty} × ${cart[id].price}</small></div>
+                    <span>${cart[id].price * cart[id].qty} ج.م</span>
+                </div>`;
+            }
+            if (count === 0) list.innerHTML = "<p style='text-align:center; color:#666; margin-top:20px;'>السلة فارغة</p>";
+            document.getElementById('cart-count').innerText = count;
+            document.getElementById('total-price').innerText = total.toLocaleString();
+            finalTotal = total;
+        }
+
+        function openCheckout() {
+            if (finalTotal === 0) return alert("السلة فارغة!");
+            document.getElementById('pay-amount').innerText = finalTotal.toLocaleString();
+            document.getElementById('payment-modal').style.display = 'flex';
+        }
+
+        function closeCheckout() { document.getElementById('payment-modal').style.display = 'none'; }
+
+        function processPayment() {
+            document.getElementById('payment-step-1').style.display = 'none';
+            document.getElementById('payment-success').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
